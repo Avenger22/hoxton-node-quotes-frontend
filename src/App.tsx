@@ -1,52 +1,34 @@
-import { useEffect, useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
-import Quote from "./Components/Quote"
-
-type Quote = {
-      author: string,
-      quote: string
-}
+import QuotePage from './Pages/QuotePage'
+import QuotesPage from './Pages/QuotesPage'
 
 function App() {
 
-  const [quotes, setQuotes] = useState<Quote[]>([])
-
-  function getQuotesFromServer():void {
-    
-    fetch(`http://localhost:8000/quotes`)
-      .then(resp => resp.json())
-      .then(quotesFromServer => setQuotes(quotesFromServer))
-  
-  }
-
-  useEffect(getQuotesFromServer, [])
-
       return (
 
-      <>
+            <>
 
-            <div className='app'>
+                  <Routes>
 
-                  <ul className='quotes-wrapper'>
+                        <Route 
+                              index 
+                              element={<Navigate replace to="/quotes" />} 
+                        />
 
-                  {
+                        <Route 
+                              path = "/quotes" 
+                              element = {<QuotesPage />}>
+                        </Route>
 
-                        quotes.map(item => 
-                        
-                                    <Quote 
-                                          key={item.author}
-                                          item = {item}
-                                    />
-                        
-                        )
+                        <Route 
+                              path = "/quotes/:author" 
+                              element = {<QuotePage />}>
+                        </Route>
 
-                  }
-
-                  </ul>
+                  </Routes>
             
-            </div>
-            
-      </>
+            </>
       
       )
 

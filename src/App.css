@@ -1,18 +1,51 @@
 .app {
   display: grid;
   grid-template-rows: 1fr;
+  height: auto;
   place-items: center;
 }
 
 .quotes-wrapper {
   display: grid;
-  grid-template-rows: auto;
-  grid-gap: 25px;
+  grid-template-rows: 1fr;
+  grid-gap: 55px;
   place-content: center;
+  background-color: rgb(240, 121, 121);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  height: auto;
 }
 
 .quote {
   display: grid;
-  grid-template-columns: 300px 300px;
-  grid-gap: 15px;
+  grid-template-columns: 0.7fr 0.3fr;
+  grid-gap: 50px;
+  cursor: pointer;
+  place-items: center;
+  place-content: center;
+}
+
+.quote span.author {
+  font-weight: 700;
+  font-size: 26px;
+}
+
+.quote span.desc {
+  font-weight: 700;
+  font-size: 16px;
+  width: 65ch;
+}
+
+.single-quote {
+  background-color: rgb(187, 126, 126);
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  grid-gap: 30px;
+  place-items: center;
+  height: 100vh;
+}
+
+.single-quote span {
+  font-size: 22px;
+  font-weight: 800;
 }
