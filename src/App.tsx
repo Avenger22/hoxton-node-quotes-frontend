@@ -22,7 +22,7 @@ function App() {
                         </Route>
 
                         <Route 
-                              path = "/quotes/:author" 
+                              path = "/quotes/:id" 
                               element = {<QuotePage />}>
                         </Route>
 

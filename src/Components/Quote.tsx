@@ -5,6 +5,7 @@ type Props = {
 }
 
 type Quote = {
+    id: number,
     author: string,
     quote: string
 }
@@ -18,7 +19,7 @@ export default function Quote({item}:Props) {
         <>
 
             <li className='quote' onClick={function () {
-                navigate(`/quotes/${item.author}`)
+                navigate(`/quotes/${item.id}`)
             }}>
 
                 <span className="author">
