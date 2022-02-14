@@ -6,7 +6,10 @@ type Props = {
 
 type Quote = {
     id: number,
-    author: string,
+    firstName: string,
+    lastName: string,
+    avatar: string,
+    age: number,
     quote: string
 }
 
@@ -23,7 +26,7 @@ export default function Quote({item}:Props) {
             }}>
 
                 <span className="author">
-                    {item.author}
+                    {item.firstName} {item.lastName}
                 </span>
 
                 <span className="desc">

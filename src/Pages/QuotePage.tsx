@@ -3,8 +3,11 @@ import { useNavigate, useParams } from "react-router-dom"
 
 type Quote = {
     id: number,    
-    author: string,
-    quote: string
+    firstName: string,
+    lastName: string,
+    age: number,
+    quote: string,
+    avatar: string
 }
 
 export default function QuotePage() {
@@ -43,7 +46,7 @@ export default function QuotePage() {
         return <main>Loading...</main>
     }
 
-    if (quoteItem.author === undefined) {
+    if (quoteItem.firstName === undefined) {
         return <main>Quote not found</main>
     }
 
@@ -57,8 +60,17 @@ export default function QuotePage() {
             }}>Get Random</button>
 
             <div className="single-quote">
-                <span>{randomClicked ? quoteRandomItem?.author : quoteItem.author}</span>
+
+                <div className="author-wrapper">
+                    <span>First name: {randomClicked ? quoteRandomItem?.firstName : quoteItem.firstName}</span>
+                    <span>Last name: {quoteItem.lastName}</span>
+                </div>
+                
                 <span>"{randomClicked ? quoteRandomItem?.quote : quoteItem.quote}"</span>
+                
+                <img src={quoteItem.avatar} />
+                <span className="age">Age: {quoteItem.age}</span>
+            
             </div>
 
             {/* {
