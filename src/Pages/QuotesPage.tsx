@@ -34,28 +34,80 @@ export default function QuotesPage() {
     let term: string = 'life'
 
     function handleFirstNameChange(e:any) {
+
         const firstName = e.target.value
-        setFirstName(firstName)
+        let isNum = /^\d+$/.test(firstName) //regex expression checking if a string has only digits
+
+        if (isNum) {
+            alert("hey enter string not numbers please")
+        }
+
+        else {
+            setFirstName(firstName)
+        }
+
     }
 
     function handleLastNameChange(e:any) {
+
         const lastName = e.target.value
+        let isNum = /^\d+$/.test(lastName) //regex expression checking if a string has only digits
+
+        if (isNum) {
+            alert("hey enter string not numbers please")
+        }
+
+        else {
+            setFirstName(firstName)
+        }
+
         setLastName(lastName)
+
     }
 
     function handleQuoteChange(e:any) {
+
         const quote = e.target.value
-        setQuote(quote)
+        let isNum = /^\d+$/.test(quote) //regex expression checking if a string has only digits
+
+        if (isNum) {
+            alert("hey enter string not numbers please")
+        }
+
+        else {
+            setQuote(quote)
+        }
+
     }
 
     function handleAvatarChange(e:any) {
+
         const avatar = e.target.value
-        setAvatar(avatar)
+        let isNum = /^\d+$/.test(avatar) //regex expression checking if a string has only digits
+
+        if (isNum) {
+            alert("hey enter string not numbers please")
+        }
+
+        else {
+            setAvatar(avatar)
+        }
+    
     }
 
     function handleAgeChange(e:any) {
+
         const age = e.target.value
-        setAge(age)
+        let isNum = /^\d+$/.test(age) //regex expression checking if a string has only digits
+
+        if (isNum === false) {
+            alert("hey enter number not string please")
+        }
+
+        else {
+            setAge(age)
+        }
+
     }
     
     function handleFormSubmit(e:any) {
