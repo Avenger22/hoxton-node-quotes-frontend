@@ -27,6 +27,7 @@ export default function QuotesPage() {
     const [quote, setQuote] = useState<string>('')
     const [avatar, setAvatar] = useState<string>('')
     const [age, setAge] = useState<number>(0)
+    const [idDelete, setIdDelete] = useState<number>(0)
 
     const [formQuote, setFormQuote] = useState<Quote | newQuote |  null>(null)
     const [quotesSearch, setQuotesSearch] = useState<Quote[]>([])
@@ -129,13 +130,13 @@ export default function QuotesPage() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newQuoteObject)
+
+        }).then(responseItem => responseItem.json())
+        
+        .then(newQuote => {
+            const updatedQuotes:Quote[] = [...quotes, newQuote]
+            setQuotes(updatedQuotes)
         })
-            .then(responseItem => responseItem.json())
-            
-            .then(newQuote => {
-                const updatedQuotes:Quote[] = [...quotes, newQuote]
-                setQuotes(updatedQuotes)
-            })
 
         setFormQuote(newQuoteObject)
         
@@ -147,6 +148,29 @@ export default function QuotesPage() {
         .then(resp => resp.json())
         .then(quotesFromServer => setQuotes(quotesFromServer))
     
+    }
+
+    function handleIdDeleteChange(e:any) {
+        const idDeleted: number = Number(e.target.value)
+        setIdDelete(idDeleted)
+    }
+
+    function handleDeleteSubmit(e:any) {
+
+        e.preventDefault()
+
+        fetch(`http://localhost:8000/quotes/${idDelete}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        }).then(response => response.json())
+
+        .then(deletedQuote => {
+            const updatedQuotes:Quote[] = quotes.filter(quote => quote.id !== deletedQuote.id)
+            setQuotes(updatedQuotes)
+        })
+
     }
 
     function getQuotesSearchFromServer():void {
@@ -218,6 +242,19 @@ export default function QuotesPage() {
 
                     <button>
                         Submit
+                    </button>
+
+                </form>
+
+                <form onSubmit={(e)=> handleDeleteSubmit(e)}>
+                
+                    <input name="id-delete" defaultValue={1} type="text" placeholder="Enter id to delete: " 
+                    onChange={(e) => {
+                        handleIdDeleteChange(e)
+                    }}></input>
+
+                    <button>
+                        submit
                     </button>
 
                 </form>
