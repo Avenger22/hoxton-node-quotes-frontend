@@ -28,6 +28,7 @@ export default function QuotesPage() {
     const [avatar, setAvatar] = useState<string>('')
     const [age, setAge] = useState<number>(0)
     const [idDelete, setIdDelete] = useState<number>(0)
+    const [firstNameUpdate, setFirstNameUpdate] = useState<string>('')
 
     const [formQuote, setFormQuote] = useState<Quote | newQuote |  null>(null)
     const [quotesSearch, setQuotesSearch] = useState<Quote[]>([])
@@ -150,6 +151,37 @@ export default function QuotesPage() {
     
     }
 
+    function handleUpdateSubmit(e:any) {
+
+        e.preventDefault()
+
+        // const firstName = e.target.firstNameUpdate.value
+        const firstName = firstNameUpdate
+        const newQuoteObject = {firstName: firstName}
+
+        fetch(`http://localhost:8000/quotes/3`, {
+        
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newQuoteObject)
+
+        }).then(responseItem => responseItem.json())
+        
+        .then(newQuote => {
+
+            const match = quotes.find(quote => quote.id === 3)
+            // @ts-ignore
+            match.firstName = newQuoteObject.firstName
+
+            const updatedQuotes:Quote[] = quotes
+            setQuotes(updatedQuotes)
+
+        })
+
+    }
+
     function handleIdDeleteChange(e:any) {
         const idDeleted: number = Number(e.target.value)
         setIdDelete(idDeleted)
@@ -179,6 +211,10 @@ export default function QuotesPage() {
         .then(resp => resp.json())
         .then(quotesSearchFromServer => setQuotesSearch(quotesSearchFromServer))
     
+    }
+
+    function handlefirstNameUpdateChange(e:any) {
+        setFirstNameUpdate(e.target.value)
     }
 
     useEffect(getQuotesFromServer, [])
@@ -251,6 +287,19 @@ export default function QuotesPage() {
                     <input name="id-delete" defaultValue={1} type="text" placeholder="Enter id to delete: " 
                     onChange={(e) => {
                         handleIdDeleteChange(e)
+                    }}></input>
+
+                    <button>
+                        submit
+                    </button>
+
+                </form>
+
+                <form onSubmit={(e)=> handleUpdateSubmit(e)}>
+                
+                    <input name="firstNameUpdate" defaultValue={'albert'} type="text" placeholder="Enter firstName to update: " 
+                    onChange={(e) => {
+                        handlefirstNameUpdateChange(e)
                     }}></input>
 
                     <button>
