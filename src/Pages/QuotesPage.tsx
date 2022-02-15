@@ -179,6 +179,7 @@ export default function QuotesPage() {
             setQuotes(updatedQuotes)
 
         })
+        .catch(error => error);
 
     }
 
@@ -202,6 +203,7 @@ export default function QuotesPage() {
             const updatedQuotes:Quote[] = quotes.filter(quote => quote.id !== deletedQuote.id)
             setQuotes(updatedQuotes)
         })
+        .catch(error => error);
 
     }
 
